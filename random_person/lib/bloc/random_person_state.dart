@@ -4,8 +4,12 @@ part of 'random_person_bloc.dart';
 abstract class RandomPersonState {}
 
 class RandomPersonInitial extends RandomPersonState {
+  RandomPersonInitial();
+}
+
+class RandomLoaded extends RandomPersonState {
   final Random_models model;
-  RandomPersonInitial(this.model);
+  RandomLoaded(this.model);
 }
 
 class RandomError extends RandomPersonState {

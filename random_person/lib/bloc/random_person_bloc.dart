@@ -11,8 +11,7 @@ part 'random_person_state.dart';
 class RandomPersonBloc extends Bloc<RandomPersonEvent, RandomPersonState> {
   RandomRepository repository = RandomRepository();
 
-  RandomPersonBloc(this.repository)
-      : super(RandomPersonInitial(Random_models()));
+  RandomPersonBloc(this.repository) : super(RandomPersonInitial());
 
   @override
   Stream<RandomPersonState> mapEventToState(
@@ -20,8 +19,9 @@ class RandomPersonBloc extends Bloc<RandomPersonEvent, RandomPersonState> {
   ) async* {
     try {
       if (event is GetRandomEvent) {
+        yield RandomPersonInitial();
         Random_models data = await repository.getRandom();
-        yield RandomPersonInitial(data);
+        yield RandomLoaded(data);
       }
     } catch (e) {
       yield RandomError(RandomExceptions.catchError(e));
